@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Financial Analysis Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Mobile phone container -->
+  <div id="mobile-container">
+    <header>💬 Financial Analysis Chatbot 💼</header>
+
+    <!-- Chat Display Area -->
+    <div id="chat-box"></div>
+
+    <!-- Input Section -->
+    <div id="input-section">
+      <select id="company">
+        <option value="">Select Company</option>
+        {% for company in companies %}
+        <option value="{{ company }}">{{ company }}</option>
+        {% endfor %}
+      </select>
+
+      <select id="predefined-query">
+        <option value="">Select Query</option>
+        {% for query in queries %}
+        <option value="{{ query }}">{{ query }}</option>
+        {% endfor %}
+      </select>
+
+      <input type="text" id="custom-query" placeholder="Ask something custom..." />
+
+      <button onclick="askQuery()">Ask</button>
+    </div>
+  </div>
+
+<script>
+async function askQuery() {
+  const company = document.getElementById("company").value;
+  const predefinedQuery = document.getElementById("predefined-query").value;
+  const customQuery = document.getElementById("custom-query").value;
+
+  if (!company) {
+    alert("Please select a company.");
+    return;
+  }
+
+  const queryPayload = {
+    company: company,
+    predefined_query: predefinedQuery,
+    custom_query: customQuery,
+  };
+
+  const response = await fetch('/query', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(queryPayload),
+  });
+
+  const result = await response.json();
+
+  const chatBox = document.getElementById("chat-box");
+
+  // Create a new bubble container
+  const bubbleContainer = document.createElement("div");
+  bubbleContainer.className = "bubble-container";
+
+  // Create Bot Bubble
+  const botBubble = document.createElement("div");
+  botBubble.className = "bot-bubble";
+  botBubble.innerText = result.response;
+
+  // Create User Bubble
+  const userBubble = document.createElement("div");
+  userBubble.className = "user-bubble";
+  userBubble.innerText = customQuery || predefinedQuery || "Unknown query.";
+
+  // Append elements: user bubble above, bot bubble below
+  bubbleContainer.appendChild(userBubble); // User bubble appears first
+  bubbleContainer.appendChild(botBubble); // Bot bubble appears below
+
+  // Append the bubble container to the chatbox
+  chatBox.appendChild(bubbleContainer);
+
+  // Scroll to the bottom to show the latest messages
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+The Financial Analysis Chatbot is a web-based application designed to provide users with key insights into financial data for specific companies. Users can select a company and either choose a predefined query or enter a custom query. The chatbot processes the query, retrieves relevant information from the dataset, and displays the response in a user-friendly chat interface.
+
+Predefined Queries:-
+
+The chatbot can handle the following predefined queries:
+
+-What is the total revenue?
+Retrieves the most recent total revenue for the selected company.
+
+-How has net income changed over the last year?
+Calculates the percentage change in net income between the two most recent fiscal years.
+
+-What is the total assets growth over the last year?
+Calculates the percentage growth in total assets between the two most recent fiscal years.
+
+Key Features:-
+
+*Dynamic Dropdowns: The chatbot dynamically populates the list of available companies and predefined queries using data from the backend.
+*Chat Interface: Responses are displayed as chat bubbles, creating an intuitive and engaging user experience.
+*Error Handling: The system gracefully handles missing data or invalid queries, providing meaningful feedback to the user.
+
+Limitations:-
+
+-Predefined Query Scope:
+The chatbot is designed to respond effectively only to predefined queries. Custom queries are not currently supported beyond acknowledging their receipt.
+
+-Custom Query Processing:
+The chatbot does not process or analyze custom queries that fall outside the scope of the predefined options.
+
+Use Case:-
+
+This chatbot is ideal for quick, high-level insights into financial metrics for companies, such as during a financial review or investment analysis. It simplifies access to data and enables non-technical users to obtain valuable information without needing deep knowledge of finance or programming.
